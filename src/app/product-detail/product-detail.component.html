@@ -1,0 +1,39 @@
+<div class="row productDetailsMainDiv" *ngIf="productDetails">
+	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+    	<div class="product-image">
+			<img alt="No Image" src="../../assets/images/product-details-sample-image.png">
+		</div>
+		<button class="btn buyNowButton" [class.disabled]="productDetails.attributes.sold_out">Buy Now</button>
+	</div>
+	<div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 product-specifications">
+		<span class="product-details-navigation">
+			<a [routerLink]="[ '../']">Products</a> > {{productDetails.attributes.category}} > {{productDetails.attributes.name}} 
+		</span>
+		<h3 *ngIf="productDetails">{{productDetails.attributes.name}}</h3>
+		<div class="price-details">
+			<p class="special-price">Special Price</p>
+			<span class="product-sale-price">${{productDetails.attributes.sale_price}}</span>
+			<span class="product-price"><s>${{productDetails.attributes.price}}</s></span>
+		</div>
+		<div class="product-highlights">
+			<p>Highlights</p>
+			<div>
+				<p>Sample text</p>
+				<p>Sample text</p>
+				<p>Sample text</p>
+				<p>Sample text</p>
+				<p>Sample text</p>
+			</div>
+		</div>
+		<div class="seller-details">
+			<p>Seller</p>
+			<div >
+				<p>Sephoria Digital</p>
+			</div>
+		</div>
+		<div class="safe-payments">
+			<i class="fa fa-check fa-2x fa-fw"></i>
+			<span>Safe and Secure Payments. Easy returns. 100% Authentic products.</span>
+		</div>
+	</div>
+</div>

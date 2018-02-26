@@ -1,0 +1,91 @@
+.productMainDiv{
+	margin-top: 3%;
+	cursor: pointer;
+	margin-bottom: 3%;
+}
+.productData{
+	border: 1px solid #c0b8b8;
+}
+.product-price{
+	font-weight: bold;
+}
+.filtersSection{
+	margin-top: 15px;
+	text-align: left;
+}
+.filtersSection>h3{
+	height: 50px;
+    border-bottom: 1px solid #cac7c7;
+}
+.filtersSection>h4{
+	margin-left: 15px;
+}
+.product-sub-categories{
+	margin-left: 25px;
+	text-transform: capitalize;
+}
+.filtersSection a{
+	cursor: pointer;
+}
+.loadingSpinner{
+	position: absolute;
+	 left: 50%;
+	 top: 50%;
+	 -webkit-transform: translate(-50%, -50%);
+	 transform: translate(-50%, -50%);
+}
+.errorMessage{
+	/*position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 70px;
+    right: 0px;
+    margin: auto;
+    top: 50%;*/
+    margin-top: 250px;
+    color: #ed1313;
+    font-size: 20px;
+    font-weight: bold;
+}
+.filtersSectionNames{
+	display: inline-block;
+}
+.filtersSectionNames span{
+	margin-left: 15px;
+}
+.categoryFilter, .priceFilter{
+	cursor: pointer;
+}
+.selectedFiltersTitle{
+	font-size: 16px;
+    font-weight: bold;
+}
+.selectedFiltersList{
+	margin-left: 15px;
+	text-transform: capitalize;
+}
+.products-pagination{
+	text-align: right;
+}
+.sephora-logo{
+	height: 30px;
+	text-align: left;
+}
+.sephora-header{
+	margin-top: 10px;
+}
+.sephora-logo > img{
+	height: 20px;
+}
+@media (max-width: 767px) {
+	.products-pagination{
+		text-align: left !important;
+		margin-top: 10px;
+	}
+	.ngx-pagination{
+		padding-left: 0px !important;
+	}
+	.errorMessage{
+		margin-top: 55px !important;
+	}
+}

@@ -1,0 +1,103 @@
+<div class="row" *ngIf="loadingProducts">
+	<div class="loadingSpinner">
+    	<i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true"> </i>
+    	<p class="">Loading Products...</p>
+	</div>
+</div>
+<div class="row sephora-header" *ngIf="!loadingProducts && productsArray.length>0">
+	<div class="col-lg-2 col-sm-2 col-xs-12 sephora-logo">
+		<img alt="Sephora" src="../../assets/images/sephora-logo.svg">
+	</div>
+	<div class="col-lg-10 col-sm-10 col-xs-12 products-pagination">
+		<pagination-controls (pageChange)="p = $event"></pagination-controls>
+	</div>
+</div>
+<div class="row" *ngIf="!loadingProducts">
+	<div class="col-lg-3 col-sm-3 col-xs-12 filtersSection">
+		<h3>Filters</h3>
+		<p><a (click)="clearAllFilters()">Clear all filters.</a></p>
+		<div class="selected filters" *ngIf="selectedFilters.length>0">
+			<p class="selectedFiltersTitle">Selected Category Filters</p>
+			<ng-container *ngFor="let selectedFilter of selectedFilters">
+				<p class="selectedFiltersList"><a>{{selectedFilter}}</a></p>
+			</ng-container>
+		</div>
+		<div class="categoryFilter" (click)="showCategoriesFilter()">
+			<h4 class="filtersSectionNames">Categories</h4>
+			<span *ngIf="!displayCategoriesFilter"><i class="fa fa-plus fa-fw"></i></span>
+			<span *ngIf="displayCategoriesFilter"><i class="fa fa-minus fa-fw"></i></span>
+		</div>
+		<div *ngIf="displayCategoriesFilter">
+			<ng-container *ngFor="let product of uniqueCategoriesArray">
+				<a (click)="filterProductsByCategories(product.attributes.category)">
+					<p class="product-sub-categories">{{product.attributes.category}}</p>
+				</a>
+			</ng-container>
+		</div>
+		<div class="priceFilter" (click)="showPriceFilter()">
+			<h4 class="filtersSectionNames">Price</h4>
+			<span *ngIf="!displayPriceFilter"><i class="fa fa-plus fa-fw"></i></span>
+			<span *ngIf="displayPriceFilter"><i class="fa fa-minus fa-fw"></i></span>
+		</div>
+		<div *ngIf="displayPriceFilter">
+			<a>
+				<p class="product-sub-categories">
+					<input type="checkbox" value="1" [(ngModel)]="checkbox1" (change)="filterProductsByPrice($event)"/>
+					<span> Under $25</span>
+				</p>
+			</a>
+			<a>
+				<p class="product-sub-categories">
+					<input type="checkbox" value="2" [(ngModel)]="checkbox2" (change)="filterProductsByPrice($event)"/>
+					<span> $25 - $50</span>
+				</p>
+			</a>
+			<a>
+				<p class="product-sub-categories">
+					<input type="checkbox"  value="3" [(ngModel)]="checkbox3" (change)="filterProductsByPrice($event)"/>
+					<span> $50 - $100</span>
+				</p>
+			</a>
+			<a>
+				<p class="product-sub-categories">
+					<input type="checkbox"  value="4" [(ngModel)]="checkbox4" (change)="filterProductsByPrice($event)"/>
+					<span> $100 - $150</span>
+				</p>
+			</a>
+			<a>
+				<p class="product-sub-categories">
+					<input type="checkbox"  value="5" [(ngModel)]="checkbox5" (change)="filterProductsByPrice($event)"/>
+					<span> $150 - $200</span>
+				</p>
+			</a>
+			<a>
+				<p class="product-sub-categories">
+					<input type="checkbox"  value="6" [(ngModel)]="checkbox6" (change)="filterProductsByPrice($event)">
+					<span> Above $200</span></p>
+			</a>
+		</div>
+	</div>
+	<div class="col-lg-9 col-sm-9 col-xs-12">
+		<div class="row" *ngIf="(productsArray && productsArray.length>0);else messageTemplate">
+		    <ng-container *ngFor="let product of productsArray | paginate: { itemsPerPage: 10, currentPage: p } ">
+		      <div class="col-lg-4 col-md-6 col-xs-12 productMainDiv" (click)="goToProductDetailPage(product.id)">
+		      	<div class="productData">
+			      	<img alt="No Image" src="../../assets/images/no-image.jpg">
+			        <p>{{product.attributes.name}}</p>
+			        <p>
+			        	<span class="product-price">${{product.attributes.sale_price}}</span>
+			        	<span>&nbsp;<s>${{product.attributes.price}}</s></span>
+			        </p>
+		    	</div>
+		      </div>
+		    </ng-container>
+		</div>
+		<ng-template #messageTemplate>
+			<div class="row">
+				<div class="errorMessage">
+					<p>There are no products at the moment.</p>
+				</div>
+			</div>
+		</ng-template>
+	</div>
+</div>
